@@ -15,7 +15,8 @@ for the course.
   `git clone git@github.com:saasbook/rottenpotatoes-rails-intro.git`
 
 0. Then `cd rottenpotatoes-rails-intro` to change to the app's
-directory.
+directory.ls
+
 
 0. Run the command `bundle install --without production` to make sure all the gems
 (libraries) used by the app are in place.
