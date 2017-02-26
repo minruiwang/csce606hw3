@@ -10,15 +10,27 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
-  def index
-    if params[:title] == "asc"
-      @movies = Movie.all.order(:title => "ASC")
+def index
+    @all_ratings = Movie.all_ratings
+    @ratings = params[:ratings]
+    if @ratings
+      @checked_ratings = @ratings.keys
+      if params[:title] == "asc"
+        @movies = Movie.all.where(:rating => @checked_ratings).order(:title => "ASC")
       elsif params[:release_date] == "asc"
-      @movies = Movie.all.order(:release_date => "ASC")
+        @movies = Movie.all.where(:rating => @checked_ratings).order(:release_date => "ASC")
       else
-      @movies = Movie.all
+        @movies = Movie.all.where(:rating => @checked_ratings)
+      end
+    else
+      if params[:title] == "asc"
+        @movies = Movie.all.order(:title => "ASC")
+      elsif params[:release_date] == "asc"
+        @movies = Movie.all.order(:release_date => "ASC")
+      else
+        @movies = Movie.all
+      end
     end
-
   end
 
   def new
